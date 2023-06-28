@@ -1,3 +1,4 @@
+/*
 package com.example.library;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,3 +8,4 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class mapperapplication {
 }
 
+*/

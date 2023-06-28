@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface LendRecordMapper extends BaseMapper<LendRecord> {
-    @Select("delete from lend_record where isbn=#{id} ")
-    public void deleteLR (int id);
+//    @Select("delete from lend_record where isbn=#{id} ")
+//    public void deleteLR (int id);
 
     @Select("select * from lend_record where reader_id =#{readerId} and isbn=#{isbn} and bookname=#{bookname} ")
     public List<LendRecord> find(int readerId,int isbn,String bookname);
