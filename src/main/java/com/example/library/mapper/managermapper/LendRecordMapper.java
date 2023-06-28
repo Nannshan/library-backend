@@ -1,4 +1,4 @@
-package com.example.library.mapper;
+package com.example.library.mapper.managermapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.library.entity.LendRecord;
