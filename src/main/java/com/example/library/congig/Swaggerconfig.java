@@ -1,7 +1,6 @@
 package com.example.library.congig;
 
 
-import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -28,8 +27,8 @@ public class Swaggerconfig {
         //基本信息的配置，信息会在api文档上显示
         private ApiInfo apiInfo(){
             return new ApiInfoBuilder()
-                    .title("zg测试的接口文档")
-                    .description("xx相关接口的文档")
+                    .title("智慧图书馆测试的接口文档")
+                    .description("相关接口的文档")
                     .version("1.0")
                     .build();
 

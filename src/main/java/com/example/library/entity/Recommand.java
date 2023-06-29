@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("recommand")
 public class Recommand {
-    @TableId(type = IdType.ID_WORKER_STR)
+    @TableId(type = IdType.AUTO)
     private int rid;
     private int uid;
     private String recname;
@@ -23,7 +23,7 @@ public class Recommand {
         this.uid = uid;
     }
 
-    public void setRecname(String rename) {
+    public void setRecname(String recname) {
         this.recname = recname;
     }
 
@@ -71,13 +71,16 @@ public class Recommand {
         return reason;
     }
 
-    public Recommand(int rid, int uid, String recname, String reauthor, String republisher, String email, String reason) {
-        this.uid = uid;
-        this.rid = rid;
-        this.recname = recname;
-        this.reauthor = reauthor;
-        this.republisher = republisher;
-        this.email = email;
-        this.reason = reason;
+    @Override
+    public String toString() {
+        return "Recommand{" +
+                "rid=" + rid +
+                ", uid=" + uid +
+                ", recname='" + recname + '\'' +
+                ", reauthor='" + reauthor + '\'' +
+                ", republisher='" + republisher + '\'' +
+                ", email='" + email + '\'' +
+                ", reason='" + reason + '\'' +
+                '}';
     }
 }

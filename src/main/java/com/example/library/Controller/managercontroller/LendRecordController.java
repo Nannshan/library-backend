@@ -1,7 +1,7 @@
 package com.example.library.Controller.managercontroller;
 
 import com.example.library.entity.LendRecord;
-import com.example.library.mapper.managermapper.LendRecordMapper;
+import com.example.library.mapper.LendRecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
