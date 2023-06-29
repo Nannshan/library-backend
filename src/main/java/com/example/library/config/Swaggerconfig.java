@@ -1,4 +1,4 @@
-package com.example.library.congig;
+package com.example.library.config;
 
 
 import org.springframework.context.annotation.Bean;

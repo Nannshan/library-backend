@@ -1,4 +1,4 @@
-package com.example.library.congig;
+package com.example.library.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
