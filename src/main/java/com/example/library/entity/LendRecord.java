@@ -1,6 +1,9 @@
 package com.example.library.entity;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -8,16 +11,20 @@ import java.util.Date;
 
 @TableName("lend_record")
 public class LendRecord {
+    @TableId(type = IdType.ID_WORKER_STR)
+    private Integer id;
+    @TableField("reader_id")
     private Integer readerId;
-    //@TableId(type = IdType.ID_WORKER_STR)
     private String isbn;
     private String bookname;
     @JsonFormat(locale="zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("lend_time")
     private Date lendTime;
     @JsonFormat(locale="zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    @TableField("return_time")
     private Date returnTime;
     private String status;
-    private Integer borrownum;
+
 
     @Override
     public String toString() {
@@ -27,17 +34,9 @@ public class LendRecord {
                 ", bookname='" + bookname + '\'' +
                 ", lendTime=" + lendTime +
                 ", returnTime=" + returnTime +
-                ", status='" + status + '\'' +
-                ", borrownum=" + borrownum +
+                ", status='" + status +
+
                 '}';
-    }
-
-    public Integer getBorrownum() {
-        return borrownum;
-    }
-
-    public void setBorrownum(Integer borrownum) {
-        this.borrownum = borrownum;
     }
 
     public Date getReturnTime() {

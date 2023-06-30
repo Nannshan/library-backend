@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/reader")
-public class RecommandController {
+public class RecommendController {
     @Autowired
     private RecommandMapper recommand_mapper;
 

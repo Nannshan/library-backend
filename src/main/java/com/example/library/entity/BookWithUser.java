@@ -1,15 +1,17 @@
 package com.example.library.entity;
 
 
-import java.time.LocalDate;
+import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.time.LocalDate;
+@TableName("bookwithuser")
 public class BookWithUser {
     private Integer id;
     private Integer uid;
     private Integer  prolong;
     private String isbn;
-    private String book_name;
-    private String nick_name;
+    private String bookname;
+    private String nickname;
     private LocalDate lendtime;
     private LocalDate deadtime;
 
@@ -20,8 +22,8 @@ public class BookWithUser {
                 ", uid=" + uid +
                 ", prolong=" + prolong +
                 ", isbn='" + isbn + '\'' +
-                ", book_name='" + book_name + '\'' +
-                ", nick_name='" + nick_name + '\'' +
+                ", bookname='" + bookname + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", lendtime=" + lendtime +
                 ", deadtime=" + deadtime +
                 '}';
@@ -59,20 +61,20 @@ public class BookWithUser {
         this.isbn = isbn;
     }
 
-    public String getBook_name() {
-        return book_name;
+    public String getBookname() {
+        return bookname;
     }
 
-    public void setBook_name(String book_name) {
-        this.book_name = book_name;
+    public void setBookname(String bookname) {
+        this.bookname = bookname;
     }
 
-    public String getNick_name() {
-        return nick_name;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNick_name(String nick_name) {
-        this.nick_name = nick_name;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public LocalDate getLendtime() {

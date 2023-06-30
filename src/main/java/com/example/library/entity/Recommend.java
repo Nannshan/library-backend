@@ -1,11 +1,13 @@
 package com.example.library.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.junit.runners.Parameterized;
 
 @TableName("recommand")
-public class Recommand {
+public class Recommend {
     @TableId(type = IdType.AUTO)
     private int rid;
     private int uid;
@@ -15,11 +17,11 @@ public class Recommand {
     private String email;
     private String reason;
 
-    public void setR_id(int rid) {
+    public void setRid(int rid) {
         this.rid = rid;
     }
 
-    public void setU_id(int uid) {
+    public void setUid(int uid) {
         this.uid = uid;
     }
 
@@ -43,11 +45,11 @@ public class Recommand {
         this.reason = reason;
     }
 
-    public int getR_id() {
+    public int getRid() {
         return rid;
     }
 
-    public int getU_id() {
+    public int getUid() {
         return uid;
     }
 

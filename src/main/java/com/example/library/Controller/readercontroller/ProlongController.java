@@ -3,7 +3,9 @@ package com.example.library.Controller.readercontroller;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.example.library.entity.BookWithUser;
+import com.example.library.entity.LendRecord;
 import com.example.library.mapper.BookWithUserMapper;
+import com.example.library.mapper.LendRecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,19 +18,19 @@ import java.time.temporal.ChronoUnit;
 @RequestMapping("/reader")
 public class ProlongController {
     @Autowired
-    private BookWithUserMapper pl;
+    private LendRecordMapper lrm;
     //根据id查询该对象
     @PostMapping("/findProbyId")
-    public BookWithUser findProbyId(int id){
-       BookWithUser a = pl.selectById(id);
+    public LendRecord findProbyId(int id){
+        LendRecord a = lrm.selectById(id);
         System.out.println(a.toString());
        return a;
     }
     //根据id修改prolong
-    @PostMapping("/changeprobyId")
+    @PostMapping("/changeProbyId")
     public int changeprobyId(int id){
         int i;//1表示成功,0表示失败
-        BookWithUser ba = findProbyId(id);
+        LendRecord ba = findProbyId(id);
         UpdateWrapper<BookWithUser> uw = new UpdateWrapper<>();
         if(ba.getProlong()>0){//可以续借
             LocalDate d =ba.getDeadtime();
