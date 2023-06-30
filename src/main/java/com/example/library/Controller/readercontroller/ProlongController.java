@@ -2,9 +2,7 @@ package com.example.library.Controller.readercontroller;
 
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.example.library.entity.BookWithUser;
 import com.example.library.entity.LendRecord;
-import com.example.library.mapper.BookWithUserMapper;
 import com.example.library.mapper.LendRecordMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,14 +29,15 @@ public class ProlongController {
     public int changeprobyId(int id){
         int i;//1表示成功,0表示失败
         LendRecord ba = findProbyId(id);
-        UpdateWrapper<BookWithUser> uw = new UpdateWrapper<>();
+        System.out.println(ba.toString());
+        UpdateWrapper<LendRecord> uw = new UpdateWrapper<>();
         if(ba.getProlong()>0){//可以续借
-            LocalDate d =ba.getDeadtime();
+            LocalDate d =ba.getReturnTime();
             d=d.plus(7, ChronoUnit.DAYS);
             uw.eq("id",ba.getId())
                     .set("prolong",0)
-                    .set("deadtime",d);
-            pl.update(null,uw);
+                    .set("return_time",d);
+            lrm.update(null,uw);
             return 1;
         }
         else{

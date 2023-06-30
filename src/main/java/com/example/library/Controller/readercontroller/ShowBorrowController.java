@@ -3,8 +3,8 @@ package com.example.library.Controller.readercontroller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.library.entity.BookWithUser;
-import com.example.library.mapper.BookWithUserMapper;
+import com.example.library.entity.LendRecordWithUsernameView;
+import com.example.library.mapper.LendRecordWithUsernameViewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/reader")
 public class ShowBorrowController {
     @Autowired
-    private BookWithUserMapper sc;
+    private LendRecordWithUsernameViewMapper lrm;
     //使用分页查询获取借阅记录
     @PostMapping("/showBorrow")
-    public Page<BookWithUser> find(String isbn, String book_name, Integer uid, @RequestParam(defaultValue = "1")int page, @RequestParam(defaultValue = "10")int rows){
+    public Page<LendRecordWithUsernameView> find(String isbn, String bookname, Integer readerId, @RequestParam(defaultValue = "1")int current, @RequestParam(defaultValue = "10")int size){
         //查询条件序列
-        QueryWrapper<BookWithUser> queryWrapper = new QueryWrapper();
+        QueryWrapper<LendRecordWithUsernameView> queryWrapper = new QueryWrapper();
         queryWrapper.eq("isbn",isbn);
-        queryWrapper.eq("book_name",book_name);
-        queryWrapper.eq("uid",uid);
+        queryWrapper.eq("name",bookname);
+        queryWrapper.eq("reader_id",readerId);
         //分页查询
-        Page<BookWithUser> bpage = new Page<>(page,rows);
-        sc.selectPage(bpage,queryWrapper);
+        Page<LendRecordWithUsernameView> bpage = new Page<>(current,size);
+        lrm.selectPage(bpage,queryWrapper);
         return bpage;
     }
 

@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @TableName("lend_record")
 public class LendRecord {
@@ -16,35 +15,50 @@ public class LendRecord {
     @TableField("reader_id")
     private Integer readerId;
     private String isbn;
-    private String bookname;
-    @JsonFormat(locale="zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
     @TableField("lend_time")
-    private Date lendTime;
-    @JsonFormat(locale="zh",timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDate lendTime;
     @TableField("return_time")
-    private Date returnTime;
+    private LocalDate returnTime;
     private String status;
+    private Integer prolong;
 
+
+
+    public LocalDate getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(LocalDate returnTime) {
+        this.returnTime = returnTime;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
         return "LendRecord{" +
-                "isbn='" + isbn + '\'' +
+                "id=" + id +
                 ", readerId=" + readerId +
-                ", bookname='" + bookname + '\'' +
+                ", isbn='" + isbn + '\'' +
                 ", lendTime=" + lendTime +
                 ", returnTime=" + returnTime +
-                ", status='" + status +
-
+                ", status='" + status + '\'' +
+                ", prolong=" + prolong +
                 '}';
     }
 
-    public Date getReturnTime() {
-        return returnTime;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setReturnTime(Date returnTime) {
-        this.returnTime = returnTime;
+    public Integer getProlong() {
+        return prolong;
+    }
+
+    public void setProlong(Integer prolong) {
+        this.prolong = prolong;
     }
 
     public String getStatus() {
@@ -55,20 +69,12 @@ public class LendRecord {
         this.status = status;
     }
 
-    public Date getLendTime() {
+    public LocalDate getLendTime() {
         return lendTime;
     }
 
-    public void setLendTime(Date lendTime) {
+    public void setLendTime(LocalDate lendTime) {
         this.lendTime = lendTime;
-    }
-
-    public String getBookname() {
-        return bookname;
-    }
-
-    public void setBookname(String bookname) {
-        this.bookname = bookname;
     }
 
     public Integer getReaderId() {

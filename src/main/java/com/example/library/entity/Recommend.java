@@ -1,10 +1,8 @@
 package com.example.library.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import org.junit.runners.Parameterized;
 
 @TableName("recommand")
 public class Recommend {
