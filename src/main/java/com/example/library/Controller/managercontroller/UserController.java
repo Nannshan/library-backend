@@ -6,9 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.library.entity.User;
 import com.example.library.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/user")
@@ -34,6 +32,12 @@ public class UserController {
         Page<User> page = new Page<>(current,size);
        IPage iPage = userMapper.selectPage(page, queryWrapper);
         return  iPage;
+    }
+
+    @PutMapping("/updateUserInfo")
+    public String updateUserInfo(@RequestBody User user){
+        int i = userMapper.updateById(user); // 返回的是影响的条目数,0修改失败,1修改成功
+        return ""+i;
     }
 
 }
