@@ -3,7 +3,7 @@ package com.example.library.entity;
 
 import java.time.LocalDate;
 
-public class bookwithuser {
+public class BookWithUser {
     private Integer id;
     private Integer uid;
     private Integer  prolong;
