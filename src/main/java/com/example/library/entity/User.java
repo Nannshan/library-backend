@@ -10,12 +10,14 @@ public class User {
     @TableId(type = IdType.AUTO)
     private int id;
     private String username;
+    @TableField(select = false)
     private String password;
     @TableField("nick_name")
     private String nickname;
     private String phone;
     private String sex;
     private String address;
+    @TableField(select = false)
     private int role;
 
     public int getId() {

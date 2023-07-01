@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -19,7 +20,7 @@ public class UserController {
     private UserMapper userMapper;
 
     /**
-     *
+     * 获取所有读者
      * @param id
      * @param username 用户名
      * @param nickname 昵称
@@ -27,22 +28,47 @@ public class UserController {
      * @param size 页码大小
      * @return
      */
-    @PostMapping("/findAll")
-    public Result getAllUsers( String id, String username, String nickname, int current, int size){
-        QueryWrapper<User> queryWrapper = new QueryWrapper();
-        // role为0表示读者角色
-        queryWrapper.eq("role",0);
-        // 设置起始值及每页条数
-       try{
-           Page<User> page = new Page<>(current,size);
-           IPage iPage = userMapper.selectPage(page, queryWrapper);
-           return Result.ok().data("users", iPage);
-       }catch (Exception e){
-           System.out.println(e);
-       }
-        return  Result.error();
-    }
+//    @PostMapping("/findAll")
+//    public Result getAllUsers( String id, int current, int size){
+//        QueryWrapper<User> queryWrapper = new QueryWrapper();
+//        // role为0表示读者角色
+//        queryWrapper.eq("role",0);
+//       try{
+//           // 设置起始值及每页条数
+//           Page<User> page = new Page<>(current,size);
+//           IPage iPage = userMapper.selectPage(page, queryWrapper);
+//           return Result.ok().data("users", iPage);
+//       }catch (Exception e){
+//           System.out.println(e);
+//       }
+//        return  Result.error();
+//    }
 
+    /**
+     * 多条件分页查询用户
+     * @param id 读者编号
+     * @param username 用户名
+     * @param nickname 密码
+     * @param current 当前页码
+     * @param size 每页大小
+     * @return
+     */
+    @GetMapping("/getUsersByCondition")
+    public Result getUsersByCondition(String id, String username, String nickname, int current, int size){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        try{
+            queryWrapper.like("id", id);
+            queryWrapper.like("username", username);
+            queryWrapper.like("nick_name", nickname);
+            // 设置起始值及每页条数
+            Page<User> page = new Page<>(current,size);
+            IPage iPage = userMapper.selectPage(page, queryWrapper);
+            return Result.ok().data("users", iPage);
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.error().data("info", "参数错误");
+        }
+    }
     @PutMapping("/updateUserInfo")
     public Result updateUserInfo(@RequestBody User user){
         try {
