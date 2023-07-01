@@ -9,6 +9,9 @@ import com.example.library.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController()
 @RequestMapping("/user")
 public class UserController {
@@ -62,4 +65,31 @@ public class UserController {
         return Result.error().data("info", "读者可能有未归还的借阅记录");
     }
 
+    @PutMapping("/updatePassword")
+    public Result updatePassword(String uid, String oldPwd, String newPwd, String confirmPwd){
+        // 校验查询用户的校验密码是否正确
+        User user;
+        try{
+            Map<String, Object> queryMap = new HashMap<>();
+            queryMap.put("id", Integer.parseInt(uid));
+            queryMap.put("password", oldPwd);
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.allEq(queryMap, false);
+            user = userMapper.selectOne(queryWrapper);
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.error().data("info", "参数错误");
+        }
+        if(user == null){
+            return Result.error().data("info", "密码错误");
+        }
+        // 修改密码
+        if(newPwd.equals(confirmPwd)){
+            user.setPassword(newPwd);
+            userMapper.updateById(user);
+        }else {
+            return Result.error().data("info", "确认密码不一致");
+        }
+        return Result.ok();
+    }
 }
