@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDate;
 
-@TableName("LendRecordWithUsernameView")
-public class LendRecordWithUsernameView {
+@TableName("LendRecordWithBooknameView")
+public class LendRecordWithBooknameView {
         @TableId(type = IdType.ID_WORKER_STR)
         private Integer id;
         @TableField("reader_id")
@@ -25,7 +25,7 @@ public class LendRecordWithUsernameView {
 
     @Override
     public String toString() {
-        return "LendRecordWithUsernameView{" +
+        return "LendRecordWithBooknameView{" +
                 "id=" + id +
                 ", readerId=" + readerId +
                 ", isbn='" + isbn + '\'' +
