@@ -69,6 +69,20 @@ public class UserController {
             return Result.error().data("info", "参数错误");
         }
     }
+
+    @GetMapping("/getUserById")
+    public Result getUserById(String id){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        try {
+            User user = userMapper.selectById(id);
+            if(user != null){
+                return Result.ok().data("user", user);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return Result.error().data("info", "无法获取该用户");
+    }
     @PutMapping("/updateUserInfo")
     public Result updateUserInfo(@RequestBody User user){
         try {

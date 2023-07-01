@@ -20,7 +20,6 @@ public class ShowCommendController {
         Page<Recommend> commandpage =new Page<>(current,size);
 
         recommandmapper.selectPage(commandpage,null);
-        System.out.println(commandpage.getRecords());
         return commandpage;
         }
     @DeleteMapping("/deleteRecommend")
