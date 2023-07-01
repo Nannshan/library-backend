@@ -4,7 +4,7 @@ package com.example.library.Controller.readercontroller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.library.entity.LendRecordWithBooknameView;
-import com.example.library.mapper.LendRecordWithBooknameViewMapper;
+import com.example.library.view.LendRecordWithBooknameViewMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
