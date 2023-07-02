@@ -21,6 +21,15 @@ public class ProlongController {
     //根据id查询该对象
     public LendRecord findProbyId(int id){
         LendRecord a = lrm.selectById(id);
+        //借阅状态更新
+/*        UpdateWrapper<LendRecord> uw = new UpdateWrapper<>();
+        LocalDate now = LocalDate.now();
+        if(a.getReturnTime().isBefore(now)){
+            a.setStatus("2");
+            uw.eq("id", a.getId())
+                    .set("status", 2);
+            lrm.update(null,uw);
+        }*/
         System.out.println(a.toString());
        return a;
     }
