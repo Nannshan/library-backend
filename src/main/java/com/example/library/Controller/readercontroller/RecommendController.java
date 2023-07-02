@@ -1,6 +1,7 @@
 package com.example.library.Controller.readercontroller;
 
 import com.example.library.mapper.RecommandMapper;
+import com.example.library.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,15 @@ public class RecommendController {
 
     //增加采购推荐
     @PostMapping("/addRecommand")
-    public int addRecommand(Integer uid,String recname,String reauthor,String republisher,String email ,String reason){
+    public Result addRecommand(Integer uid, String recname, String reauthor, String republisher, String email , String reason){
         System.out.println(email);
-        int i = recommand_mapper.add(uid,recname,reauthor,republisher,email,reason);
-        return i;
+        try {
+            recommand_mapper.add(uid,recname,reauthor,republisher,email,reason);
+            return Result.ok();
+        }catch (Exception e){
+
+        }
+        return Result.error();
 
     }
 
