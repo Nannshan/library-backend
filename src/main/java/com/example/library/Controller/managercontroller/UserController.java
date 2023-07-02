@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController()
@@ -69,6 +68,20 @@ public class UserController {
             return Result.error().data("info", "参数错误");
         }
     }
+
+    @GetMapping("/getUserById")
+    public Result getUserById(String id){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        try {
+            User user = userMapper.selectById(id);
+            if(user != null){
+                return Result.ok().data("user", user);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+        return Result.error().data("info", "无法获取该用户");
+    }
     @PutMapping("/updateUserInfo")
     public Result updateUserInfo(@RequestBody User user){
         try {
@@ -117,5 +130,23 @@ public class UserController {
             return Result.error().data("info", "确认密码不一致");
         }
         return Result.ok();
+    }
+
+    @PostMapping("/login")
+    public Result login(@RequestBody User user){
+        try {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("username", user.getUsername());
+            queryWrapper.eq("password", user.getPassword());
+            queryWrapper.eq("role", 1);
+            User userResult = userMapper.selectOne(queryWrapper);
+            if(userResult == null){
+                return Result.error().data("info", "用户名或密码错误");
+            }
+            return Result.ok().data("uid", userResult.getId());
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.error().data("info", "参数错误");
+        }
     }
 }
