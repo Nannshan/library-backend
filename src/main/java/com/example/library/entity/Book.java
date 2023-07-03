@@ -1,12 +1,15 @@
 package com.example.library.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.time.LocalDate;
 
 @TableName("book")
 public class Book {
+    @TableId(type = IdType.AUTO)
     private int id;
     private int isbn;
     private String name;
@@ -16,8 +19,8 @@ public class Book {
     @TableField("create_time")
     private LocalDate createtime;
     private int borrownum;
-    private String describe;
-    private int resrnum;
+    private String description;
+    private int restnum;
     private int total;
     private String place;
 
@@ -32,8 +35,8 @@ public class Book {
                 ", publisher='" + publisher + '\'' +
                 ", createtime=" + createtime +
                 ", borrownum=" + borrownum +
-                ", describe='" + describe + '\'' +
-                ", resrnum=" + resrnum +
+                ", description='" + description + '\'' +
+                ", restnum=" + restnum +
                 ", total=" + total +
                 ", place='" + place + '\'' +
                 '}';
@@ -103,20 +106,20 @@ public class Book {
         this.borrownum = borrownum;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getdescription() {
+        return description;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setdescription(String description) {
+        this.description = description;
     }
 
-    public int getResrnum() {
-        return resrnum;
+    public int getrestnum() {
+        return restnum;
     }
 
-    public void setResrnum(int resrnum) {
-        this.resrnum = resrnum;
+    public void setrestnum(int restnum) {
+        this.restnum = restnum;
     }
 
     public int getTotal() {
