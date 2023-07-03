@@ -54,7 +54,6 @@ public class UserController {
      */
     @GetMapping("/getUsersByCondition")
     public Result getUsersByCondition(String id, String username, String nickname, int current, int size){
-        System.out.println(id+username+nickname+current+size);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         try{
             queryWrapper.like("id", id);
@@ -134,16 +133,17 @@ public class UserController {
     }
 
     /**
-     * 管理员登录(role需要为1)
-     * @param user
+     * 管理员登录(查询时role值需要是1)
+     * @param username
+     * @param password
      * @return
      */
     @PostMapping("/login")
-    public Result login(@RequestBody User user){
+    public Result login(String username, String password){
         try {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-            queryWrapper.eq("username", user.getUsername());
-            queryWrapper.eq("password", user.getPassword());
+            queryWrapper.eq("username", username);
+            queryWrapper.eq("password",password);
             queryWrapper.eq("role", 1);
             User userResult = userMapper.selectOne(queryWrapper);
             if(userResult == null){

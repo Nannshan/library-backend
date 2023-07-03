@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 @TableName("user")
 @JsonIgnoreProperties({"password", "role"})
@@ -14,8 +13,10 @@ public class User {
     @TableId(type = IdType.AUTO)
     private int id;
     private String username;
-    @TableField(select = false)
+
+    @JsonIgnore
     private String password;
+
     @TableField("nick_name")
     private String nickname;
     private String phone;
@@ -40,20 +41,20 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getNickname() {
         return nickname;
     }
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
