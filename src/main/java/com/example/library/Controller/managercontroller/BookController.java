@@ -6,10 +6,8 @@ import com.example.library.mapper.BookMapper;
 import com.example.library.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController()
 @RequestMapping("/book")
@@ -31,5 +29,23 @@ public class BookController {
             System.out.println(e);
             return Result.error().data("info", "添加失败,参数错误");
         }
+    }
+
+    @DeleteMapping("/deleteBook")
+    public ResponseEntity<String> deleteBook(int id) {
+        int rows = bookMapper.deleteById(id);
+        if (rows > 0) {
+            return ResponseEntity.ok("删除成功");
+        } else {
+            return ResponseEntity.ok("删除失败");
+        }
+    }
+
+    @PostMapping("/update")
+    public int updateBook(String isbn, String name, float price, String author, String publisher, String createTime,
+                          int borrowNum, String description, int restNum, int total, String place) {
+        int rows = bookMapper.updateBook(isbn, name, price, author, publisher, createTime, borrowNum,
+                description, restNum, total, place);
+        return rows;
     }
 }
