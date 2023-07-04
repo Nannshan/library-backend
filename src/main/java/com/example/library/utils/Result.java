@@ -1,7 +1,5 @@
 package com.example.library.utils;
 
-import com.baomidou.mybatisplus.extension.api.R;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +30,13 @@ public class Result {
         return r;
     }
 
+    public static Result tokenError(){
+        Result r = new Result();
+        r.setSuccess(false);
+        r.setCode(ResultCode.TOKENFALSE);
+        r.setMessage("失败");
+        return r;
+    }
     // 设置数据
     public Result data(String key, Object object){
         Map<String, Object> resultData = new HashMap<>();

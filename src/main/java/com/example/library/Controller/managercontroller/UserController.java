@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.library.entity.User;
 import com.example.library.mapper.UserMapper;
+import com.example.library.utils.JwtUtils;
 import com.example.library.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -149,7 +150,13 @@ public class UserController {
             if(userResult == null){
                 return Result.error().data("info", "用户名或密码错误");
             }
-            return Result.ok().data("uid", userResult.getId());
+
+            String token = JwtUtils.generateToken(userResult.getUsername());
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("uid", userResult.getId());
+            resultMap.put("username", userResult.getUsername());
+            resultMap.put("token", token);
+            return Result.ok().data("data", resultMap);
         }catch (Exception e){
             System.out.println(e);
             return Result.error().data("info", "参数错误");
