@@ -1,20 +1,18 @@
 package com.example.library.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @TableName("user")
-@JsonIgnoreProperties({"password", "role"})
+@JsonIgnoreProperties({"role"})
 public class User {
     @TableId(type = IdType.AUTO)
     private int id;
     private String username;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @TableField("nick_name")
@@ -22,7 +20,7 @@ public class User {
     private String phone;
     private String sex;
     private String address;
-    @TableField(select = false)
+    @TableField(select = false, updateStrategy = FieldStrategy.NEVER)
     private int role;
 
     public int getId() {

@@ -162,4 +162,26 @@ public class UserController {
             return Result.error().data("info", "参数错误");
         }
     }
+
+    /**
+     * 管理员注册(将role设置为1)
+     * @param user
+     * @return
+     */
+    @PostMapping("/managerRegister")
+    public Result managerRegister(@RequestBody User user){
+        try {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("username", user.getUsername());
+            User userFind = userMapper.selectOne(queryWrapper);
+            if(userFind != null){
+                return Result.error().data("info", "用户名已存在");
+            }
+            user.setRole(1);
+            userMapper.insert(user);
+            return Result.ok().data("info", "注册成功");
+        }catch (Exception e){
+            return Result.error().data("info", "参数错误");
+        }
+    }
 }
