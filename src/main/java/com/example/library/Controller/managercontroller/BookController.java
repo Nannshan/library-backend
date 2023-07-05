@@ -9,6 +9,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController()
 @RequestMapping("/book")
 public class BookController {
@@ -47,5 +49,18 @@ public class BookController {
         int rows = bookMapper.updateBook(isbn, name, price, author, publisher, createTime, borrowNum,
                 description, restNum, total, place);
         return rows;
+    }
+
+    @GetMapping("/searchBook")
+    public Result searchBook(String keywords){
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.like("name", keywords).or().like("author", keywords).or();
+        try {
+            List<Book> books = bookMapper.selectList(bookQueryWrapper);
+            return Result.ok().data("books", books);
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.error().data("info", "参数错误");
+        }
     }
 }

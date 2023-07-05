@@ -31,7 +31,9 @@ public class WebRequestInterceptor implements WebMvcConfigurer {
                 .addPathPatterns("/book/**")
                 .addPathPatterns("/manager/**")
                 .excludePathPatterns("/user/login")
-                .excludePathPatterns("/user/managerRegister");
+                .excludePathPatterns("/user/managerRegister")
+                .excludePathPatterns("/user/register")
+                .excludePathPatterns("/book/searchBook");
     }
 
     @Bean

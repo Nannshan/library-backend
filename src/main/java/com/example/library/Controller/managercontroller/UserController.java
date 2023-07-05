@@ -133,6 +133,37 @@ public class UserController {
         return Result.ok();
     }
 
+
+    /**
+     * 管理员登录(查询时role值需要是1)
+     * @param username
+     * @param password
+     * @return
+     */
+    @PostMapping("/managerLogin")
+    public Result managerLogin(String username, String password){
+        try {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("username", username);
+            queryWrapper.eq("password",password);
+            queryWrapper.eq("role", 1);
+            User userResult = userMapper.selectOne(queryWrapper);
+            if(userResult == null){
+                return Result.error().data("info", "用户名或密码错误");
+            }
+
+            String token = JwtUtils.generateToken(userResult.getUsername());
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("uid", userResult.getId());
+            resultMap.put("username", userResult.getUsername());
+            resultMap.put("token", token);
+            return Result.ok().data("data", resultMap);
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.error().data("info", "参数错误");
+        }
+    }
+
     /**
      * 管理员登录(查询时role值需要是1)
      * @param username
@@ -145,7 +176,6 @@ public class UserController {
             QueryWrapper<User> queryWrapper = new QueryWrapper<>();
             queryWrapper.eq("username", username);
             queryWrapper.eq("password",password);
-            queryWrapper.eq("role", 1);
             User userResult = userMapper.selectOne(queryWrapper);
             if(userResult == null){
                 return Result.error().data("info", "用户名或密码错误");
@@ -178,6 +208,27 @@ public class UserController {
                 return Result.error().data("info", "用户名已存在");
             }
             user.setRole(1);
+            userMapper.insert(user);
+            return Result.ok().data("info", "注册成功");
+        }catch (Exception e){
+            return Result.error().data("info", "参数错误");
+        }
+    }
+
+    /**
+     * 用户注册(不传role,默认的role值是0)
+     * @param user
+     * @return
+     */
+    @PostMapping("/register")
+    public Result register(@RequestBody User user){
+        try {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("username", user.getUsername());
+            User userFind = userMapper.selectOne(queryWrapper);
+            if(userFind != null){
+                return Result.error().data("info", "用户名已存在");
+            }
             userMapper.insert(user);
             return Result.ok().data("info", "注册成功");
         }catch (Exception e){
