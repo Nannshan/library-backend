@@ -18,7 +18,7 @@ public class LendRecordWithBooknameView {
         private LocalDate lendTime;
         @TableField("return_time")
         private LocalDate returnTime;
-        private String status;
+        private Integer status;
         private Integer prolong;
         @TableField("name")
         private String bookname;
@@ -69,11 +69,11 @@ public class LendRecordWithBooknameView {
             this.prolong = prolong;
         }
 
-        public String getStatus() {
+        public Integer getStatus() {
             return status;
         }
 
-        public void setStatus(String status) {
+        public void setStatus(Integer status) {
             this.status = status;
         }
 
