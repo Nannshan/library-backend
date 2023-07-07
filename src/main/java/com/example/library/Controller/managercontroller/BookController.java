@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController()
 @RequestMapping("/book")
 public class BookController {
@@ -60,6 +62,19 @@ public class BookController {
             Page<Book> page = new Page<>(current,size);
             IPage iPage = bookMapper.selectPage(page,queryWrapper);
             return Result.ok().data("book", iPage);
+        }catch (Exception e){
+            System.out.println(e);
+            return Result.error().data("info", "参数错误");
+        }
+    }
+
+    @GetMapping("/searchBook")
+    public Result searchBook(String keywords){
+        QueryWrapper<Book> bookQueryWrapper = new QueryWrapper<>();
+        bookQueryWrapper.like("name", keywords).or().like("author", keywords).or();
+        try {
+            List<Book> books = bookMapper.selectList(bookQueryWrapper);
+            return Result.ok().data("books", books);
         }catch (Exception e){
             System.out.println(e);
             return Result.error().data("info", "参数错误");

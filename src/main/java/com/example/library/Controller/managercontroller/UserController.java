@@ -95,7 +95,7 @@ public class UserController {
     }
 
     @DeleteMapping("/deleteUser")
-    public Result deleteUserById(String id){
+    public Result deleteUserById(Integer id){
         try{
             userMapper.deleteById(id);
             return Result.ok().data("info", "删除成功");
@@ -107,6 +107,7 @@ public class UserController {
 
     @PutMapping("/updatePassword")
     public Result updatePassword(String uid, String oldPwd, String newPwd, String confirmPwd){
+        System.out.println(uid+oldPwd+confirmPwd+newPwd);
         // 校验查询用户的校验密码是否正确
         User user;
         try{
